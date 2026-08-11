@@ -6,11 +6,11 @@
 
 ## 1. Executive Summary
 
-Manual reconciliation of vendor invoices against general ledger entries is time‑consuming and error‑prone in many finance departments. This project demonstrates a simple, end‑to‑end solution that:
+Manual reconciliation of vendor invoices against general ledger entries is time-consuming and error-prone in many finance departments. This project demonstrates a simple, end-to-end solution that:
 
-- Ingest mock financial data (GL entries & vendor invoices) into a SQL database.
-- Expose key reconciliation metrics via a REST API.
-- Present an interactive dashboard showing **outstanding invoices**, **flagged discrepancies**, and **aging summaries**.
+- Ingests mock financial data (GL entries & vendor invoices) into a SQL database.
+- Exposes key reconciliation metrics via a REST API.
+- Presents an interactive dashboard showing **outstanding invoices**, **flagged discrepancies**, and **aging summaries**.
 
 The tool is built with minimal dependencies (vanilla HTML/CSS/JS, Python Flask, SQLite) to prove that core reconciliation logic can be delivered quickly and iteratively—a common need in consulting and audit technology engagements.
 
@@ -22,25 +22,27 @@ The tool is built with minimal dependencies (vanilla HTML/CSS/JS, Python Flask, 
 - **Discrepancy Flags** – Automatic detection of:
   - Invoices without a matching GL entry.
   - Amount mismatches between an invoice and its linked GL entry.
-- **Aging Summary** – Count of outstanding invoices grouped into classic buckets: 0‑30, 31‑60, 61‑90, and 90+ days overdue.
-- **One‑click Refresh** – Re‑fetches the latest data from the backend.
-- **Mock Data Generator** – Reproducible script that creates a realistic dataset with pre‑seeded discrepancies.
+- **Aging Summary** – Count of outstanding invoices grouped into classic buckets: 0–30, 31–60, 61–90, and 90+ days overdue.
+- **One-click Refresh** – Re-fetches the latest data from the backend.
+- **Mock Data Generator** – Reproducible script that creates a realistic dataset with pre-seeded discrepancies.
 
 ---
 
 ## 3. Tech Stack
 
-| Layer      | Technology |
-|------------|------------|
-| Frontend   | HTML5, CSS3, Vanilla JavaScript (ES6) |
-| Backend    | Python 3.x, Flask |
-| Database   | SQLite (file‑based, zero‑config) |
-| Data Gen   | Python script (uses `sqlite3` standard library) |
-| Versioning | Git with incremental commits |
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend** | HTML5, CSS3, Vanilla JavaScript (ES6) |
+| **Backend** | Python 3.x, Flask |
+| **Database** | SQLite (file-based, zero-config) |
+| **Data Gen** | Python script (uses `sqlite3` standard library) |
+| **Versioning** | Git with incremental commits |
 
 ---
 
 ## 4. Project Structure
+
+```text
 erp-recon-dashboard/
 ├── README.md
 ├── .gitignore
@@ -49,35 +51,7 @@ erp-recon-dashboard/
 │   └── generate_data.py          # creates tables & mock data
 ├── backend/
 │   └── app.py                    # Flask server + API routes
-├── frontend/
-│   ├── index.html
-│   ├── style.css
-│   └── dashboard.js---
-
-## 5. Prerequisites
-
-- Python 3.8 or higher
-- Git (to clone and inspect commit history)
-- A modern web browser
-
----
-6. Setup & Run (Local)
-   # Clone the repository
-git clone https://github.com/your-username/erp-recon-dashboard.git
-cd erp-recon-dashboard
-
-# Create a virtual environment (recommended)
-python -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Generate the mock database
-python scripts/generate_data.py
-
-# Start the Flask server
-python backend/app.py
-
-# Open your browser to
-http://localhost:5000
+└── frontend/
+    ├── index.html
+    ├── style.css
+    └── dashboard.js
