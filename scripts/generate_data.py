@@ -71,7 +71,7 @@ def create_schema(cursor):
             vi.invoice_number,
             vi.vendor_name,
             vi.amount AS invoice_amount,
-            gl.amount AS gl_amount,
+            gl.credit AS gl_amount,
             CASE
                 WHEN gl.id IS NULL THEN 'No matching GL'
                 WHEN ABS(vi.amount - gl.amount) > 0.01 THEN 'Amount mismatch'
