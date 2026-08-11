@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Reconciliation Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>ERP Reconciliation Dashboard</h1>
+        <button id="refresh-btn">Refresh Data</button>
+    </header>
+
+    <main>
+        <!-- Outstanding Invoices -->
+        <section class="card">
+            <h2>Outstanding Invoices</h2>
+            <div class="table-container">
+                <table id="invoices-table">
+                    <thead>
+                        <tr>
+                            <th>Invoice #</th>
+                            <th>Vendor</th>
+                            <th>Amount</th>
+                            <th>Due Date</th>
+                            <th>Days Overdue</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invoices-tbody">
+                        <tr><td colspan="6" class="loading">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Discrepancies -->
+        <section class="card">
+            <h2>Flagged Discrepancies</h2>
+            <div id="discrepancies-list" class="loading">Loading...</div>
+        </section>
+
+        <!-- Aging Summary -->
+        <section class="card">
+            <h2>Aging Summary</h2>
+            <div id="aging-container" class="loading">Loading...</div>
+        </section>
+    </main>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
