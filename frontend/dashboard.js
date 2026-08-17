@@ -3,7 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('refresh-btn').addEventListener('click', loadDashboard);
 });
 
-
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-IE', {
+        style: 'currency',
+        currency: 'EUR',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(amount);
+}
 
 async function loadDashboard() {
     setLoading(true);
@@ -52,7 +59,7 @@ function renderInvoices(invoices) {
         <tr>
             <td>${escapeHtml(inv.invoice_number)}</td>
             <td>${escapeHtml(inv.vendor_name)}</td>
-            <td>$${inv.amount.toFixed(2)}</td>
+            <td>${formatCurrency(inv.amount)}</td>
             <td>${inv.due_date}</td>
             <td>${inv.days_overdue}</td>
             <td><span class="status-badge status-${inv.status}">${capitalize(inv.status)}</span></td>
@@ -71,8 +78,8 @@ function renderDiscrepancies(discrepancies) {
         <div class="discrepancy-item">
             <div>
                 <strong>${escapeHtml(d.invoice_number)}</strong> – ${escapeHtml(d.vendor_name)}<br>
-                <small>Invoice: €${d.invoice_amount.toFixed(2)}</small>
-                ${d.gl_amount !== null ? `<small> | GL: €${d.gl_amount.toFixed(2)}</small>` : ''}
+                <small>Invoice: ${formatCurrency(d.invoice_amount)}</small>
+                ${d.gl_amount !== null ? `<small> | GL: ${formatCurrency(d.gl_amount)}</small>` : ''}
             </div>
             <span class="issue-tag">${escapeHtml(d.issue)}</span>
         </div>
@@ -88,7 +95,6 @@ function renderAging(aging) {
         { key: 'bucket_90_plus', label: '90+ days', count: aging.bucket_90_plus || 0 }
     ];
 
-    // Find max count to scale bars
     const maxCount = Math.max(...buckets.map(b => b.count), 1);
 
     container.innerHTML = `
